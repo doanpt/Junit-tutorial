@@ -1,0 +1,3 @@
+
+rootProject.name = "DemoJunit5"
+
