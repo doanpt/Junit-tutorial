@@ -20,6 +20,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
 // https://mvnrepository.com/artifact/org.mockito/mockito-core
     testImplementation("org.mockito:mockito-core:3.11.1")
+    testImplementation("org.mockito:mockito-junit-jupiter:3.11.1")
 
 }
 
