@@ -1,7 +1,11 @@
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledOnOs
+import org.junit.jupiter.api.condition.EnabledOnOs
+import org.junit.jupiter.api.condition.OS
 import kotlin.test.*
+
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MathUtilTest {
@@ -56,6 +60,27 @@ class MathUtilTest {
         Assertions.assertThrows(RuntimeException::class.java) { contactManager.addContact("John", "Doe", null) }
     }
 
+    @Test
+    @DisplayName("Should Create Contact On Mac OS")
+    @EnabledOnOs(value = [OS.MAC])
+    fun shouldCreateContactOnMAC() {
+        contactManager.addContact(
+            "John", "Doe", "0123456789"
+        )
+        assertFalse(contactManager.allContacts.isEmpty())
+        assertEquals(1, contactManager.allContacts.size)
+    }
+
+    @Test
+    @DisplayName("Should Create Contact except MacOS")
+    @DisabledOnOs(value = [OS.MAC])
+    fun shouldCreateContactExceptMacOS() {
+        contactManager.addContact(
+            "John", "Doe", "0123456789"
+        )
+        assertFalse(contactManager.allContacts.isEmpty())
+        assertEquals(1, contactManager.allContacts.size)
+    }
 
     //We have 7 popular method naming ways, I prefer solution 3 or 4.
     // For more detail, refer 7-popular-method-naming-in-junit.md file in resource folder
