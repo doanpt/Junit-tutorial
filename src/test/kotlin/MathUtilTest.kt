@@ -14,7 +14,7 @@ import kotlin.test.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MathUtilTest {
-    private lateinit var contactManager: ContactManager
+    lateinit var contactManager: ContactManager
 
     @BeforeAll
     fun setupAll() {
@@ -97,22 +97,45 @@ class MathUtilTest {
         assertEquals(1, contactManager.allContacts.size)
     }
 
-    @Test
-    @DisplayName("Repeat Contact Creation Test 5 Times")
-    @RepeatedTest(value = 5, name = "Repeating Contact Creation Test {currentRepetition} of {totalRepetitions}")
-    fun shouldTestContactCreationRepeatedly() {
-        contactManager.addContact("John", "Doe", "0123456789")
-        assertFalse(contactManager.allContacts.isEmpty())
-        assertEquals(1, contactManager.allContacts.size)
+    @Nested
+    inner class RepeatedTests {
+        @DisplayName("Repeat Contact Creation Test 5 Times")
+        @RepeatedTest(value = 5, name = "Repeating Contact Creation Test {currentRepetition} of {totalRepetitions}")
+        fun shouldTestContactCreationRepeatedly() {
+            contactManager.addContact("John", "Doe", "0123456789")
+            assertFalse(contactManager.allContacts.isEmpty())
+            assertEquals(1, contactManager.allContacts.size)
+        }
     }
 
-    @DisplayName("Phone Number should match the required Format")
-    @ParameterizedTest
-    @ValueSource(strings = ["0123456789", "0123456798", "0123456897"])
-    fun shouldTestPhoneNumberFormatUsingValueSource(phoneNumber: String) {
-        contactManager.addContact("John", "Doe", phoneNumber)
-        assertFalse(contactManager.allContacts.isEmpty())
-        assertEquals(1, contactManager.allContacts.size)
+    @Nested
+    inner class ParameterizedTests {
+        @DisplayName("Phone Number should match the required Format")
+        @ParameterizedTest
+        @ValueSource(strings = ["0123456789", "0123456798", "0123456897"])
+        fun shouldTestPhoneNumberFormatUsingValueSource(phoneNumber: String?) {
+            contactManager.addContact("John", "Doe", phoneNumber)
+            assertFalse(contactManager.allContacts.isEmpty())
+            assertEquals(1, contactManager.allContacts.size)
+        }
+
+        @DisplayName("CSV Source Case - Phone Number should match the required Format")
+        @ParameterizedTest
+        @CsvSource("0123456789", "0123456798", "0123456897")
+        fun shouldTestPhoneNumberFormatUsingCSVSource(phoneNumber: String?) {
+            contactManager.addContact("John", "Doe", phoneNumber)
+            assertFalse(contactManager.allContacts.isEmpty())
+            assertEquals(1, contactManager.allContacts.size)
+        }
+
+        @DisplayName("CSV File Source Case - Phone Number should match the required Format")
+        @ParameterizedTest
+        @CsvFileSource(resources = ["/data.csv"])
+        fun shouldTestPhoneNumberFormatUsingCSVFileSource(phoneNumber: String?) {
+            contactManager.addContact("John", "Doe", phoneNumber)
+            assertFalse(contactManager.allContacts.isEmpty())
+            assertEquals(1, contactManager.allContacts.size)
+        }
     }
 
     @DisplayName("Method Source Case - Phone Number should match the required Format")
@@ -128,22 +151,12 @@ class MathUtilTest {
         return listOf("0123456789", "0123456798", "0977521942")
     }
 
-    @DisplayName("CSV Source Case - Phone Number should match the required Format")
-    @ParameterizedTest
-    @CsvSource("0123456789", "0123456798", "0123456897")
-    fun shouldTestPhoneNumberFormatUsingCSVSource(phoneNumber: String?) {
-        contactManager.addContact("John", "Doe", phoneNumber)
-        assertFalse(contactManager.allContacts.isEmpty())
-        assertEquals(1, contactManager.allContacts.size)
-    }
 
-    @DisplayName("CSV File Source Case - Phone Number should match the required Format")
-    @ParameterizedTest
-    @CsvFileSource(resources = ["/data.csv"])
-    fun shouldTestPhoneNumberFormatUsingCSVFileSource(phoneNumber: String?) {
-        contactManager.addContact("John", "Doe", phoneNumber)
-        assertFalse(contactManager.allContacts.isEmpty())
-        assertEquals(1, contactManager.allContacts.size)
+    @Test
+    @DisplayName("Test Should Be Disabled")
+    @Disabled
+    fun shouldBeDisabled() {
+        throw RuntimeException("Test Should Not be executed")
     }
 
     //We have 7 popular method naming ways, I prefer solution 3 or 4.
