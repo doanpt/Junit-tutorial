@@ -92,7 +92,8 @@ class MathUtilTest {
     fun shouldTestContactCreationOnDEV() {
         Assumptions.assumeFalse("DEV" == System.getProperty("ENV"))
         contactManager.addContact(
-            "John", "Doe", "0123456789")
+            "John", "Doe", "0123456789"
+        )
         assertFalse(contactManager.allContacts.isEmpty())
         assertEquals(1, contactManager.allContacts.size)
     }
@@ -112,6 +113,7 @@ class MathUtilTest {
     inner class ParameterizedTests {
         @DisplayName("Phone Number should match the required Format")
         @ParameterizedTest
+        @Tag("parameter")
         @ValueSource(strings = ["0123456789", "0123456798", "0123456897"])
         fun shouldTestPhoneNumberFormatUsingValueSource(phoneNumber: String?) {
             contactManager.addContact("John", "Doe", phoneNumber)
@@ -121,6 +123,7 @@ class MathUtilTest {
 
         @DisplayName("CSV Source Case - Phone Number should match the required Format")
         @ParameterizedTest
+        @Tag("parameter")
         @CsvSource("0123456789", "0123456798", "0123456897")
         fun shouldTestPhoneNumberFormatUsingCSVSource(phoneNumber: String?) {
             contactManager.addContact("John", "Doe", phoneNumber)
@@ -130,6 +133,7 @@ class MathUtilTest {
 
         @DisplayName("CSV File Source Case - Phone Number should match the required Format")
         @ParameterizedTest
+        @Tag("parameter")
         @CsvFileSource(resources = ["/data.csv"])
         fun shouldTestPhoneNumberFormatUsingCSVFileSource(phoneNumber: String?) {
             contactManager.addContact("John", "Doe", phoneNumber)
@@ -140,6 +144,7 @@ class MathUtilTest {
 
     @DisplayName("Method Source Case - Phone Number should match the required Format")
     @ParameterizedTest
+    @Tag("parameter")
     @MethodSource("phoneNumberList")
     fun shouldTestPhoneNumberFormatUsingMethodSource(phoneNumber: String?) {
         contactManager.addContact("John", "Doe", phoneNumber)
