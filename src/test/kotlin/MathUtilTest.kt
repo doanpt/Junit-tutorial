@@ -6,20 +6,19 @@ import kotlin.test.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MathUtilTest {
     private lateinit var contactManager: ContactManager
-    companion object {
-        @BeforeAll
-        @JvmStatic
-        fun setupAll() {
-            println("Should Print Before All Tests")
-        }
 
-        @AfterAll
-        @JvmStatic
-        fun tearDownAll() {
-            println("Should be executed at the end of the Test")
-        }
+    @BeforeAll
+    fun setupAll() {
+        println("Should Print Before All Tests")
     }
+
+    @AfterAll
+    fun tearDownAll() {
+        println("Should be executed at the end of the Test")
+    }
+
     // TODO NOTE: JUnit will create a instance of a test for each test
+    // To let Junit create only once instance for whole test class, we can use TestInstance(TestInstance.Lifecycle.PER_CLASS), then we don't need the static function of BeforeAll, AfterAll
     @BeforeEach
     fun setup() {
         println("Instantiating Contact Manager")
