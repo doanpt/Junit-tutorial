@@ -22,6 +22,9 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.11.1")
     testImplementation("org.mockito:mockito-junit-jupiter:3.11.1")
 
+    // https://mvnrepository.com/artifact/io.mockk/mockk
+    testImplementation ("io.mockk:mockk:1.11.0")
+
 }
 
 tasks.test {
