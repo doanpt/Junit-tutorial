@@ -91,6 +91,16 @@ class MathUtilTest {
         assertFalse(contactManager.allContacts.isEmpty())
         assertEquals(1, contactManager.allContacts.size)
     }
+
+    @Test
+    @DisplayName("Repeat Contact Creation Test 5 Times")
+    @RepeatedTest(value = 5, name = "Repeating Contact Creation Test {currentRepetition} of {totalRepetitions}")
+    fun shouldTestContactCreationRepeatedly() {
+        contactManager.addContact("John", "Doe", "0123456789")
+        assertFalse(contactManager.allContacts.isEmpty())
+        assertEquals(1, contactManager.allContacts.size)
+    }
+
     //We have 7 popular method naming ways, I prefer solution 3 or 4.
     // For more detail, refer 7-popular-method-naming-in-junit.md file in resource folder
     // below is testes named follow solution 3.
