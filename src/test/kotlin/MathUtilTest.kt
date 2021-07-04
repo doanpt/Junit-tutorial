@@ -5,7 +5,9 @@ import org.junit.jupiter.api.condition.DisabledOnOs
 import org.junit.jupiter.api.condition.EnabledOnOs
 import org.junit.jupiter.api.condition.OS
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
+import java.util.*
 import kotlin.test.*
 
 
@@ -112,6 +114,18 @@ class MathUtilTest {
         assertEquals(1, contactManager.allContacts.size)
     }
 
+    @DisplayName("Method Source Case - Phone Number should match the required Format")
+    @ParameterizedTest
+    @MethodSource("phoneNumberList")
+    fun shouldTestPhoneNumberFormatUsingMethodSource(phoneNumber: String?) {
+        contactManager.addContact("John", "Doe", phoneNumber)
+        assertFalse(contactManager.allContacts.isEmpty())
+        assertEquals(1, contactManager.allContacts.size)
+    }
+
+    private fun phoneNumberList(): List<String> {
+        return listOf("0123456789", "0123456798", "0977521942")
+    }
     //We have 7 popular method naming ways, I prefer solution 3 or 4.
     // For more detail, refer 7-popular-method-naming-in-junit.md file in resource folder
     // below is testes named follow solution 3.
