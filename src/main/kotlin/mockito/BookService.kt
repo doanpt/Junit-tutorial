@@ -1,4 +1,4 @@
-package mock
+package mockito
 
 interface BookService {
     fun inStock(bookId: Int): Boolean

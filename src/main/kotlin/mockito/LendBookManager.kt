@@ -1,4 +1,4 @@
-package mock
+package mockito
 
 class LendBookManager(val bookService: BookService) {
     fun checkout(bookId: Int, memberId: Int) {

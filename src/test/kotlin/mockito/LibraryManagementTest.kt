@@ -1,7 +1,5 @@
 package mockito
 
-import mock.BookService
-import mock.LendBookManager
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
