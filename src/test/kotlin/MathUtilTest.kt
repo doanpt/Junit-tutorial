@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.DisabledOnOs
 import org.junit.jupiter.api.condition.EnabledOnOs
 import org.junit.jupiter.api.condition.OS
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import kotlin.test.*
 
 
@@ -97,6 +99,15 @@ class MathUtilTest {
     @RepeatedTest(value = 5, name = "Repeating Contact Creation Test {currentRepetition} of {totalRepetitions}")
     fun shouldTestContactCreationRepeatedly() {
         contactManager.addContact("John", "Doe", "0123456789")
+        assertFalse(contactManager.allContacts.isEmpty())
+        assertEquals(1, contactManager.allContacts.size)
+    }
+
+    @DisplayName("Phone Number should match the required Format")
+    @ParameterizedTest
+    @ValueSource(strings = ["0123456789", "0123456798", "0123456897"])
+    fun shouldTestPhoneNumberFormatUsingValueSource(phoneNumber: String) {
+        contactManager.addContact("John", "Doe", phoneNumber)
         assertFalse(contactManager.allContacts.isEmpty())
         assertEquals(1, contactManager.allContacts.size)
     }
