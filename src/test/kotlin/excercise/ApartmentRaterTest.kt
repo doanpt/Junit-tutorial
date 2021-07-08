@@ -1,6 +1,7 @@
 package excercise
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.function.Executable
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,6 +11,7 @@ import java.math.BigDecimal
 class ApartmentRaterTest {
 
     @ParameterizedTest
+    @DisplayName("should_ReturnCorrectRating_When_CorrectApartment")
     @CsvSource(value = ["72.0, 250000.0, 0", "48.0, 350000.0, 1", "30.0, 600000.0, 2"])
     fun should_ReturnCorrectRating_When_CorrectApartment(area: Double?, price: Double?, rating: Int) {
 
@@ -24,6 +26,7 @@ class ApartmentRaterTest {
     }
 
     @Test
+    @DisplayName("should_ReturnErrorValue_When_IncorrectApartment")
     fun should_ReturnErrorValue_When_IncorrectApartment() {
 
         // given
@@ -38,6 +41,7 @@ class ApartmentRaterTest {
     }
 
     @Test
+    @DisplayName("should_CalculateAverageRating_When_CorrectApartmentList")
     fun should_CalculateAverageRating_When_CorrectApartmentList() {
 
         // given
@@ -55,6 +59,7 @@ class ApartmentRaterTest {
     }
 
     @Test
+    @DisplayName("should_ThrowExceptionInCalculateAverageRating_When_EmptyApartmentList")
     fun should_ThrowExceptionInCalculateAverageRating_When_EmptyApartmentList() {
 
         // given

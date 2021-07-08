@@ -1,9 +1,6 @@
 package excercise
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.RepeatedTest
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.function.Executable
 import java.math.BigDecimal
 
@@ -23,6 +20,7 @@ class RandomApartmentGeneratorTest {
         }
 
         @RepeatedTest(10)
+        @DisplayName("should_GenerateCorrectApartment_When_DefaultMinAreaMinPrice")
         fun should_GenerateCorrectApartment_When_DefaultMinAreaMinPrice() {
 
             // given
@@ -58,6 +56,7 @@ class RandomApartmentGeneratorTest {
         }
 
         @RepeatedTest(10)
+        @DisplayName("should_GenerateCorrectApartment_When_CustomMinAreaMinPrice")
         fun should_GenerateCorrectApartment_When_CustomMinAreaMinPrice() {
 
             // given

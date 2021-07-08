@@ -23,7 +23,11 @@ dependencies {
     testImplementation("org.mockito:mockito-junit-jupiter:3.11.1")
 
     // https://mvnrepository.com/artifact/io.mockk/mockk
-    testImplementation ("io.mockk:mockk:1.11.0")
+    testImplementation("io.mockk:mockk:1.11.0")
+// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner
+
+    testImplementation ("org.junit.platform:junit-platform-suite-api:1.7.0")
+    testImplementation ("org.junit.platform:junit-platform-runner:1.2.0")
 
 }
 
